@@ -1,6 +1,7 @@
 {
     "name": "oguzkurukaya/log-monitoring",
     "description": "Log monitoring via database and monitoring logs",
+    "version": "0.1",
     "type": "library",
     "license": "MIT",
     "autoload": {
@@ -16,5 +17,12 @@
     ],
     "require": {
         "php": ">=8.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Oguzkurukaya\\LogMonitoring\\LogMonitorProvider"
+            ]
+        }
     }
 }
