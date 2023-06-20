@@ -1,0 +1,20 @@
+{
+    "name": "oguzkurukaya/log-monitoring",
+    "description": "Log monitoring via database and monitoring logs",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Oguzkurukaya\\LogMonitoring\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Oguz",
+            "email": "oguzkurukaya@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.0"
+    }
+}
