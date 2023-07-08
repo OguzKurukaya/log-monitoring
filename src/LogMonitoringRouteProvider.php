@@ -12,6 +12,7 @@ class LogMonitoringRouteProvider extends ServiceProvider
     {
         $this->routes(
             function () {
+
                 $route = Route::prefix('log_monitoring');
 
                 if (
