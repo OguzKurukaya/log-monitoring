@@ -4,7 +4,7 @@ namespace Oguzkurukaya\LogMonitoring\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static log( array  $data,string $type = self::LOG_INFO, string $message = null,array  $tag = [],array  $class = [],array  $function = [])
+ * @method static log( array  $data,string $type = LOG_INFO, string $message = null,array  $tag = [],array  $class = [],array  $function = [])
  * @method static info( array  $data,string $message = null,array  $tag = [],array  $class = [],array  $function = [])
  * @method static warning( array  $data,string $message = null,array  $tag = [],array  $class = [],array  $function = [])
  * @method static error( array  $data,string $message = null,array  $tag = [],array  $class = [],array  $function = [])
@@ -14,11 +14,24 @@ use Illuminate\Support\Facades\Facade;
  */
 class LoggerFacade extends Facade
 {
-    public const LOG_INFO = 'info';
-    public const LOG_WARNING = 'warning';
-    public const LOG_ERROR = 'error';
-    public const LOG_CRITICAL = 'critical';
-    public const LOG_EMERGENCY = 'emergency';
+    public const LOG_EMERGENCY = 0;
+    public const LOG_ALERT = 1;
+
+    public const LOG_CRITICAL = 2;
+
+    public const LOG_ERROR = 3;
+    public const LOG_WARNING = 4;
+
+    public const LOG_NOTICE = 5;
+
+    public const LOG_INFO = 6;
+
+    public const LOG_DEBUG = 7;
+
+    public const LOG_DEFAULT = 8;
+
+
+
 
     protected static function getFacadeAccessor()
     {

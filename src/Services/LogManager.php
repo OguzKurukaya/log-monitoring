@@ -4,7 +4,6 @@ namespace Oguzkurukaya\LogMonitoring\Services;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use Oguzkurukaya\LogMonitoring\Facades\LoggerFacade;
 use Oguzkurukaya\LogMonitoring\Mail\LogMailler;
 use Oguzkurukaya\LogMonitoring\Models\Log;
 
@@ -16,7 +15,7 @@ class LogManager
     public function log(
         array  $data,
         string $message,
-        string $type = LoggerFacade::LOG_INFO,
+        int $type = LOG_INFO,
         array  $tag = [],
         array  $class = [],
         array  $function = []
@@ -26,10 +25,10 @@ class LogManager
          * İf anything from that above's, set it to the info
          */
         $type = match ($type) {
-            'warning' => LoggerFacade::LOG_WARNING,
-            'error' => LoggerFacade::LOG_ERROR,
-            'critical' => LoggerFacade::LOG_CRITICAL,
-            default => LoggerFacade::LOG_INFO,
+            'warning' => LOG_WARNING,
+            'error' => LOG_ERR,
+            'critical' => LOG_CRIT,
+            default => LOG_INFO,
         };
         /**
          * Let's check if the user is authenticated
@@ -69,7 +68,7 @@ class LogManager
         $this->log(
             data: $data,
             message: $message,
-            type: LoggerFacade::LOG_INFO,
+            type: LOG_INFO,
             tag: $tag,
             class: $class,
             function: $function
@@ -87,7 +86,7 @@ class LogManager
         $this->log(
             data: $data,
             message: $message,
-            type: LoggerFacade::LOG_WARNING,
+            type: LOG_WARNING,
             tag: $tag,
             class: $class,
             function: $function
@@ -105,7 +104,7 @@ class LogManager
         $this->log(
             data: $data,
             message: $message,
-            type: LoggerFacade::LOG_ERROR,
+            type: LOG_ERR,
             tag: $tag,
             class: $class,
             function: $function
@@ -123,7 +122,7 @@ class LogManager
         $this->log(
             data: $data,
             message: $message,
-            type: LoggerFacade::LOG_CRITICAL,
+            type: LOG_CRIT,
             tag: $tag,
             class: $class,
             function: $function
@@ -149,12 +148,99 @@ class LogManager
         $this->log(
             data: $data,
             message: $message,
-            type: LoggerFacade::LOG_EMERGENCY,
+            type: LOG_EMERG,
             tag: $tag,
             class: $class,
             function: $function
         );
     }
+
+
+    /**
+     * You should be in a hurry :)
+     * @param array $data
+     * @param string|null $message
+     * @param array $tag
+     * @param array $class
+     * @param array $function
+     * @return void
+     */
+ public function alert(
+        array  $data,
+        string $message = null,
+        array  $tag = [],
+        array  $class = [],
+        array  $function = []
+    ): void
+    {
+        $this->shouldMail = true;
+        $this->log(
+            data: $data,
+            message: $message,
+            type: LOG_ALERT,
+            tag: $tag,
+            class: $class,
+            function: $function
+        );
+    }
+
+    /**
+     * That is for debugging, You should see this in live
+     * @param array $data
+     * @param string|null $message
+     * @param array $tag
+     * @param array $class
+     * @param array $function
+     * @return void
+     */
+ public function debug(
+        array  $data,
+        string $message = null,
+        array  $tag = [],
+        array  $class = [],
+        array  $function = []
+    ): void
+    {
+        $this->shouldMail = true;
+        $this->log(
+            data: $data,
+            message: $message,
+            type: LOG_DEBUG,
+            tag: $tag,
+            class: $class,
+            function: $function
+        );
+    }
+
+    /**
+     * Normal, but significant log For conditions
+     * @param array $data
+     * @param string|null $message
+     * @param array $tag
+     * @param array $class
+     * @param array $function
+     * @return void
+     */
+    public function notice(
+        array  $data,
+        string $message = null,
+        array  $tag = [],
+        array  $class = [],
+        array  $function = []
+    ): void
+    {
+        $this->shouldMail = true;
+        $this->log(
+            data: $data,
+            message: $message,
+            type: LOG_NOTICE,
+            tag: $tag,
+            class: $class,
+            function: $function
+        );
+    }
+
+
 
 
     /**

@@ -20,10 +20,7 @@ return new class extends Migration
             $table->enum(
                 'type',
                 [
-                    'info',
-                    'warning',
-                    'error',
-                    'critical'
+                    1,2,3,4,5,6,7,8,0
                 ]
             );
             $table->string('message');
@@ -31,6 +28,7 @@ return new class extends Migration
             $table->json('class')->nullable();
             $table->json('function')->nullable();
             $table->string('user_id')->nullable();
+            $table->boolean('show')->default(true);
             $table->timestamp('failed_at')->nullable()->default(now()->format("Y-m-d H:i:s"));
         });
     }
